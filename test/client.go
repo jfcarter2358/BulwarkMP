@@ -4,8 +4,8 @@
 package main
 
 import (
-	"bmp/client"
-	"bmp/constants.go"
+	"github.com/jfcarter2358/bulwarkmp/client"
+	"github.com/jfcarter2358/bulwarkmp/constants.go"
 	"fmt"
 	"time"
 

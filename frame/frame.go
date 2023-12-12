@@ -1,9 +1,9 @@
 package frame
 
 import (
-	"bmp/config"
-	"bmp/constants"
-	"bmp/utils"
+	"github.com/jfcarter2358/bulwarkmp/config"
+	"github.com/jfcarter2358/bulwarkmp/constants"
+	"github.com/jfcarter2358/bulwarkmp/utils"
 	"fmt"
 	"strconv"
 	"strings"

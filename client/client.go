@@ -3,9 +3,9 @@ package client
 import (
 	"net/url"
 
-	"bmp/config"
-	"bmp/constants"
-	"bmp/frame"
+	"github.com/jfcarter2358/bulwarkmp/config"
+	"github.com/jfcarter2358/bulwarkmp/constants"
+	"github.com/jfcarter2358/bulwarkmp/frame"
 
 	"github.com/gorilla/websocket"
 	"github.com/jfcarter2358/go-logger"

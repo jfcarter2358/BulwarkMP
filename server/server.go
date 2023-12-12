@@ -1,9 +1,9 @@
 package server
 
 import (
-	"bmp/config"
-	"bmp/constants"
-	"bmp/frame"
+	"github.com/jfcarter2358/bulwarkmp/config"
+	"github.com/jfcarter2358/bulwarkmp/constants"
+	"github.com/jfcarter2358/bulwarkmp/frame"
 	"flag"
 	"log"
 	"net/http"

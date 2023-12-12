@@ -4,8 +4,8 @@
 package main
 
 import (
-	"bmp/constants"
-	"bmp/server"
+	"github.com/jfcarter2358/bulwarkmp/constants"
+	"github.com/jfcarter2358/bulwarkmp/server"
 	"fmt"
 
 	"github.com/jfcarter2358/go-logger"
