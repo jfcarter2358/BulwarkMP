@@ -24,7 +24,6 @@ type Frame struct {
 }
 
 func ParseFrame(bytes []byte) (Frame, error) {
-	logger.Debugf("", "---- Processing new frame ----")
 	f := Frame{}
 
 	data := string(bytes)
@@ -136,10 +135,12 @@ func (f *Frame) Do(c *websocket.Conn, mt int, conf *config.Config, pervious Fram
 			parts := strings.Split(f.Endpoint, "/")
 			switch parts[0] {
 			case constants.ENDPOINT_TYPE_BUFFER:
+				logger.Tracef("", "Acting on buffer data %s from %s", f.Data, parts[1])
 				if err := conf.BufferPush(parts[1], f.Data); err != nil {
 					return err
 				}
 			case constants.ENDPOINT_TYPE_QUEUE:
+				logger.Tracef("", "Acting on queue data %s from %s", f.Data, parts[1])
 				if err := conf.QueuePush(parts[1], f.Data); err != nil {
 					return err
 				}
