@@ -39,5 +39,5 @@ func main() {
 	server.QueuePull = QueuePull
 	server.QueuePush = QueuePush
 	server.Version = fmt.Sprintf("%s/%s", constants.VERSION_1, constants.PROTOCOL_PLAIN)
-	server.Start(logger.LOG_LEVEL_DEBUG, logger.LOG_FORMAT_CONSOLE, "localhost:8081")
+	server.Start(logger.LOG_LEVEL_TRACE, logger.LOG_FORMAT_CONSOLE, "localhost:8081")
 }

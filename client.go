@@ -5,7 +5,7 @@ package main
 
 import (
 	"github.com/jfcarter2358/bulwarkmp/client"
-	"github.com/jfcarter2358/bulwarkmp/constants.go"
+	"github.com/jfcarter2358/bulwarkmp/constants"
 	"fmt"
 	"time"
 
@@ -27,7 +27,7 @@ func queuePush(endpoint, data string) error {
 func main() {
 	c := client.Client{}
 	c.New(fmt.Sprintf("%s/%s", constants.VERSION_1, constants.PROTOCOL_PLAIN), "queue/foobar", bufferPush, queuePush)
-	go c.Start(logger.LOG_LEVEL_DEBUG, logger.LOG_FORMAT_CONSOLE, "localhost:8081")
+	go c.Start(logger.LOG_LEVEL_TRACE, logger.LOG_FORMAT_CONSOLE, "localhost:8081")
 
 	logger.Infof("", "Sleeping for 2...")
 	time.Sleep(2 * time.Second)

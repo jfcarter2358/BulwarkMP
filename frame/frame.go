@@ -162,6 +162,7 @@ func (f *Frame) Do(c *websocket.Conn, mt int, conf *config.Config, pervious Fram
 					return err
 				}
 				out := NewData(*conf, content, contentType)
+				out.Endpoint = f.Endpoint
 				return out.WriteFrame(c, mt, *conf)
 			case constants.ENDPOINT_TYPE_QUEUE:
 				contentType, content, err := conf.QueuePull(parts[1])
@@ -169,6 +170,7 @@ func (f *Frame) Do(c *websocket.Conn, mt int, conf *config.Config, pervious Fram
 					return err
 				}
 				out := NewData(*conf, content, contentType)
+				out.Endpoint = f.Endpoint
 				return out.WriteFrame(c, mt, *conf)
 			}
 		}
