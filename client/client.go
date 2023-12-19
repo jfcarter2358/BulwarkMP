@@ -60,7 +60,7 @@ func (cl *Client) Run(addr string) {
 		}
 		logger.Debugf("", "Processing frame %v", f)
 		if err := f.Do(cl.Conn, mt, &cl.Conf, cl.Previous); err != nil {
-			logger.Fatalf("", "Unable to reach client with error %s", err.Error())
+			logger.Errorf("", "Unable to reach client with error %s", err.Error())
 		}
 	}
 }

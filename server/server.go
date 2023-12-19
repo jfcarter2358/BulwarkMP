@@ -52,12 +52,12 @@ func connect(w http.ResponseWriter, r *http.Request) {
 			fOut := frame.NewError(conf, err)
 			if err := fOut.WriteFrame(c, mt, conf); err != nil {
 				logger.Errorf("", "Unable to reach client with error %s", err.Error())
-				return
+				// return
 			}
 		}
 		logger.Debugf("", "Processing frame %v", f)
 		if err := f.Do(c, mt, &conf, previous); err != nil {
-			logger.Fatalf("", "Unable to reach client with error %s", err.Error())
+			logger.Errorf("", "Unable to reach client with error %s", err.Error())
 		}
 		if f.Kind == constants.KIND_CLOSE {
 			logger.Infof("", "Closing connection")
