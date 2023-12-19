@@ -1,12 +1,13 @@
 package server
 
 import (
-	"github.com/jfcarter2358/bulwarkmp/config"
-	"github.com/jfcarter2358/bulwarkmp/constants"
-	"github.com/jfcarter2358/bulwarkmp/frame"
 	"flag"
 	"log"
 	"net/http"
+
+	"github.com/jfcarter2358/bulwarkmp/config"
+	"github.com/jfcarter2358/bulwarkmp/constants"
+	"github.com/jfcarter2358/bulwarkmp/frame"
 
 	"github.com/gorilla/websocket"
 	"github.com/jfcarter2358/go-logger"
@@ -41,13 +42,13 @@ func connect(w http.ResponseWriter, r *http.Request) {
 	for {
 		_, message, err := c.ReadMessage()
 		if err != nil {
-			logger.Error("", "Unable to read incoming message")
+			logger.Errorf("", "Unable to read incoming message: %s", err.Error())
 			break
 		}
 		logger.Tracef("", "Received inbound message: %s", message)
 		f, err := frame.ParseFrame(message)
 		if err != nil {
-			logger.Errorf("", "Unable to parse incoming frame")
+			logger.Errorf("", "Unable to parse incoming frame: %s", err.Error())
 			fOut := frame.NewError(conf, err)
 			if err := fOut.WriteFrame(c, mt, conf); err != nil {
 				logger.Errorf("", "Unable to reach client with error %s", err.Error())

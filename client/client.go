@@ -45,13 +45,13 @@ func (cl *Client) Run(addr string) {
 	for {
 		_, message, err := cl.Conn.ReadMessage()
 		if err != nil {
-			logger.Error("", "Unable to read incoming message")
+			logger.Errorf("", "Unable to read incoming message: %s", err.Error())
 			break
 		}
 		logger.Tracef("", "Received inbound message: %s", message)
 		f, err := frame.ParseFrame(message)
 		if err != nil {
-			logger.Errorf("", "Unable to parse incoming frame")
+			logger.Errorf("", "Unable to parse incoming frame: %s", err.Error())
 			fOut := frame.NewError(cl.Conf, err)
 			if err := fOut.WriteFrame(cl.Conn, mt, cl.Conf); err != nil {
 				logger.Errorf("", "Unable to reach client with error %s", err.Error())
