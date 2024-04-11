@@ -1,12 +1,13 @@
 package frame
 
 import (
-	"github.com/jfcarter2358/bulwarkmp/config"
-	"github.com/jfcarter2358/bulwarkmp/constants"
-	"github.com/jfcarter2358/bulwarkmp/utils"
 	"fmt"
 	"strconv"
 	"strings"
+
+	"github.com/jfcarter2358/bulwarkmp/config"
+	"github.com/jfcarter2358/bulwarkmp/constants"
+	"github.com/jfcarter2358/bulwarkmp/utils"
 
 	"github.com/gorilla/websocket"
 	"github.com/jfcarter2358/go-logger"
@@ -220,7 +221,10 @@ func (f *Frame) WriteFrame(c *websocket.Conn, mt int, conf config.Config) error 
 		message += fmt.Sprintf("%s: %d\n", constants.FIELD_CONTENT_LENGTH, f.ContentLength)
 		message += f.Data
 	}
-	err := c.WriteMessage(mt, []byte(message))
+	var err = fmt.Errorf("cannot write message, websocket connection is nil")
+	if c != nil {
+		err = c.WriteMessage(mt, []byte(message))
+	}
 	return err
 }
 
