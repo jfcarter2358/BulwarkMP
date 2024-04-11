@@ -41,7 +41,7 @@ func connect(w http.ResponseWriter, r *http.Request) {
 	defer c.Close()
 	for {
 		if c == nil {
-			logger.Errorf("", "Unable to read incoming message, websocket connection is nil", err.Error())
+			logger.Errorf("", "Unable to read incoming message, websocket connection is nil")
 			break
 		}
 		_, message, err := c.ReadMessage()
