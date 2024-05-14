@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/jfcarter2358/bulwarkmp/config"
 	"github.com/jfcarter2358/bulwarkmp/constants"
@@ -23,6 +24,8 @@ type Frame struct {
 	ContentLength int
 	Data          string
 }
+
+var socketLock = &sync.RWMutex{}
 
 func ParseFrame(bytes []byte) (Frame, error) {
 	f := Frame{}
@@ -209,6 +212,7 @@ func (f *Frame) Do(c *websocket.Conn, mt int, conf *config.Config, pervious Fram
 }
 
 func (f *Frame) WriteFrame(c *websocket.Conn, mt int, conf config.Config) error {
+	socketLock.Lock()
 	message := ""
 	message += fmt.Sprintf("%s: %s\n", constants.FIELD_VERSION, conf.Version)
 	message += fmt.Sprintf("%s: %s\n", constants.FIELD_AUTH, conf.Auth)
@@ -225,6 +229,7 @@ func (f *Frame) WriteFrame(c *websocket.Conn, mt int, conf config.Config) error 
 	if c != nil {
 		err = c.WriteMessage(mt, []byte(message))
 	}
+	socketLock.Unlock()
 	return err
 }
 
